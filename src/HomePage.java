@@ -10,8 +10,13 @@ import java.io.File;
 import java.io.IOException;
 
 public class HomePage extends JFrame implements ActionListener, KeyListener {
+    boolean success = false;
     Font PixFont = loadFont();
     String lmusic = "src/audios/lobby-music.wav";
+    String start = "src/audios/pixel-start.wav";
+    File st = new File(start);
+    AudioInputStream s = AudioSystem.getAudioInputStream(st);
+    Clip clip2 = AudioSystem.getClip();
     File music = new File(lmusic);
     AudioInputStream m = AudioSystem.getAudioInputStream(music);
     Clip clip = AudioSystem.getClip();
@@ -72,20 +77,31 @@ public class HomePage extends JFrame implements ActionListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        success = false;
         if(e.getSource()==Log) {
             if(text.getText().equals("")){
                 Log.setEnabled(false);
                 JOptionPane.showMessageDialog(null, "Please enter a name to proceed.", "ERROR!", JOptionPane.WARNING_MESSAGE);
             }else{
+                success = true;
+                try {
+                    clip2.open(s);
+                } catch (LineUnavailableException | IOException ex) {
+                    ex.printStackTrace();
+                }
+                clip2.start();
                 clip.stop();
                 clip.close();
                 try {
                     m.close();
+                    s.close();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
+                this.dispose();
+                new Game_Frame();
             }
-            Log.setEnabled(true);
+            Log.setEnabled(!success);
         }
     }
 
