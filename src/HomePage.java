@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class HomePage extends JFrame implements ActionListener, KeyListener {
+    Font PixFont = loadFont();
     String lmusic = "src/audios/lobby-music.wav";
     File music = new File(lmusic);
     AudioInputStream m = AudioSystem.getAudioInputStream(music);
@@ -29,6 +30,7 @@ public class HomePage extends JFrame implements ActionListener, KeyListener {
         this.setLayout(null);
         this.add(Log);
         this.add(text);
+        this.add(title);
         this.add(Bg);
         this.setIconImage(null);
         this.setVisible(true);
@@ -39,16 +41,23 @@ public class HomePage extends JFrame implements ActionListener, KeyListener {
         Log.setBounds(185,300, 100,30);
         //Log.setOpaque(false);
         Log.addActionListener(this);
-        Log.addKeyListener(this);
-        Log.setFocusable(false);
         Log.setBorderPainted(false);
-        Log.setBackground(new Color(134,69,23));
+        Log.setBackground(new Color(207, 167, 126));
+        Log.setForeground(new Color(128, 90, 60));
+        Log.setFont(PixFont);
 
-        text.setFont(new Font("Arial", Font.PLAIN, 20));
+        text.setFont(PixFont);
         text.setBounds(80,200, 300,50);
         text.setHorizontalAlignment(SwingConstants.CENTER);
-        text.setBackground(Color.lightGray);
+        text.setBackground(new Color(207, 167, 126));
         text.setForeground(Color.BLACK);
+        text.addKeyListener(this);
+        text.setForeground(new Color(134,69,23));
+
+        title.setBounds(60,100, 500,50);
+        title.setFont(PixFont);
+        title.setForeground(new Color(134,69,23));
+
     }
     void Loop_Music() throws LineUnavailableException, IOException {
         clip.open(m);
@@ -94,5 +103,14 @@ public class HomePage extends JFrame implements ActionListener, KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+    private Font loadFont() {
+        try {
+            File fontFile = new File("src/fonts/PressStart2P-Regular.ttf");
+            return Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont((float) 16);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+            return new Font("Press Start 2P", Font.ITALIC, (int) (float) 50);
+        }
     }
 }
