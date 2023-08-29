@@ -1,4 +1,4 @@
-import javax.sound.sampled.spi.AudioFileReader;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,12 +12,12 @@ import java.io.IOException;
 public class HomePage extends JFrame implements ActionListener, KeyListener {
     boolean success = false;
     Font PixFont = loadFont();
-    String lmusic = "src/audios/lobby-music.wav";
+    String Lobby_Music = "src/audios/lobby-music.wav";
     String start = "src/audios/pixel-start.wav";
     File st = new File(start);
     AudioInputStream s = AudioSystem.getAudioInputStream(st);
     Clip clip2 = AudioSystem.getClip();
-    File music = new File(lmusic);
+    File music = new File(Lobby_Music);
     AudioInputStream m = AudioSystem.getAudioInputStream(music);
     Clip clip = AudioSystem.getClip();
     JTextField text = new JTextField(10);
