@@ -33,6 +33,7 @@ public class HomePage extends JFrame implements ActionListener, KeyListener {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Tik Tak Toe");
         this.setLayout(null);
+        this.setLocationRelativeTo(null);
         this.add(Log);
         this.add(text);
         this.add(title);
@@ -71,7 +72,7 @@ public class HomePage extends JFrame implements ActionListener, KeyListener {
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
         }
     }
 
@@ -79,7 +80,7 @@ public class HomePage extends JFrame implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         success = false;
         if(e.getSource()==Log) {
-            if(text.getText().equals("")){
+            if(text.getText().isEmpty()){
                 Log.setEnabled(false);
                 JOptionPane.showMessageDialog(null, "Please enter a name to proceed.", "ERROR!", JOptionPane.WARNING_MESSAGE);
             }else{
@@ -87,7 +88,7 @@ public class HomePage extends JFrame implements ActionListener, KeyListener {
                 try {
                     clip2.open(s);
                 } catch (LineUnavailableException | IOException ex) {
-                    ex.printStackTrace();
+                    ex.fillInStackTrace();
                 }
                 clip2.start();
                 clip.stop();
@@ -125,7 +126,7 @@ public class HomePage extends JFrame implements ActionListener, KeyListener {
             File fontFile = new File("src/fonts/PressStart2P-Regular.ttf");
             return Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont((float) 16);
         } catch (FontFormatException | IOException e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return new Font("Press Start 2P", Font.ITALIC, (int) (float) 50);
         }
     }
